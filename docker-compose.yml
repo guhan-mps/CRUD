@@ -17,6 +17,7 @@ services:
       dockerfile: ./Dockerfile
     depends_on:
       - pgsql
-    ports: -8000:8000
+    ports:
+      - 8000:8000
     volumes:
       - ./sql_app:/code/app
