@@ -14,12 +14,6 @@ spec:
     spec:
       containers:
         - name: fastapi
-          image: guhan/fastapi-image:latest
-          env:
-            - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: fastapi-secret
-                  key: URL
+          image: guhan286/fastapi:latest
           ports:
-            - containerPort: 5000
+            - containerPort: 8000
