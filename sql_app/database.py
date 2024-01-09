@@ -3,8 +3,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:admin@pgsql/db"
-
+SQLALCHEMY_DATABASE_URL = "postgresql://postgres:admin@pgsql/db" #for docker-compose
+#SQLALCHEMY_DATABASE_URL = "postgresql://postgres:admin@localhost/db" #normal run and for kubernetes
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL  # connect_args={"check_same_thread": False}
 )

@@ -9,8 +9,6 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: postgres
       POSTGRES_DB: db
-    ports:
-      - "5432:5432"
     volumes:
       - app-vol:/var/lib/postgresql/data
   python:
