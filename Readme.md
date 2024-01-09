@@ -1,5 +1,7 @@
 Database runs in the namespace of the container. So the Database URL must contain the container name instead of localhost.
 
+Do not use port 5432 explicitly in yaml of postgres
+
 Hashed contents in Linux
 echo -n "content" | base64
 
