@@ -7,3 +7,9 @@ echo -n "content" | base64
 
 Hashed contents in Windows
 powershell "[convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes(\"postgresql://postgres:admin@localhost:5432/db\"))"
+
+SSH into minikube
+ssh -i ~/.minikube/machines/minikube/id_rsa docker@$(minikube ip)
+
+Accessing any running container(also within minikube)
+docker exec -it CONTAINER_NAME bash
