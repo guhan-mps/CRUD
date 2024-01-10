@@ -1,11 +1,11 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-
+import os
 from ..config.database import Base
 
 
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = os.environ['UserModelName']
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
@@ -17,7 +17,7 @@ class User(Base):
 
 
 class Item(Base):
-    __tablename__ = "items"
+    __tablename__ = os.environ['ItemModelName']
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)

@@ -19,5 +19,9 @@ services:
       - pgsql
     ports:
       - "8000:8000"
+    environment:
+      DatabaseURL: postgresql://postgres:admin@pgsql/db
+      UserModelName: users
+      ItemModelName: items
     volumes:
       - ./sql_app:/code/app
