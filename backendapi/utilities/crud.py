@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from ..utilities import schemas
+from ..schemas import schemas
 
 from ..models import models
 
