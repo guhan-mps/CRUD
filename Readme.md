@@ -13,3 +13,8 @@ ssh -i ~/.minikube/machines/minikube/id_rsa docker@$(minikube ip)
 
 Accessing any running container(also within minikube)
 docker exec -it CONTAINER_NAME bash
+
+Execution:
+    -Normal execution: uvicorn backendapi.sql_app.main:app --reload
+    -Docker compose: docker compose up --build
+    -Kubernetes: kubectl apply -f [yaml file](Executed in the order Secrect -> Deployment -> Service)
