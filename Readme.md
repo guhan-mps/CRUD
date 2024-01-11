@@ -55,4 +55,4 @@ kubectl apply -f fastapi-secret.yaml
 kubectl apply -f fastapi-deployment.yaml
 kubectl apply -f fastapi-service.yaml
 ```
-Now the API could be accessed via SwaggerUI in the url <http://$(minikube ip):30008/docs>
+Now the API could be accessed via SwaggerUI in the url <http://$\(minikube ip\):30008/docs>
