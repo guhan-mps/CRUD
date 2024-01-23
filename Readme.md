@@ -11,6 +11,7 @@ This project aims at making CRUD operations possible over an web application. In
 ### Dependencies
 
 * Any OS is supported for this project
+
 * python>=3.10
 * fastapi>=0.68.0,<0.69.0
 * pydantic>=1.8.0,<2.0.0
@@ -22,16 +23,19 @@ This project aims at making CRUD operations possible over an web application. In
 ### Installing
 
 * git clone https://github.com/guhan-mps/CRUD/tree/master
+
 * If you are going to execute directly on your system set the **DatabaseURL** environment variable to your postgresql connection string in the format postgresql://\[USER\]:\[PASSWORD\]@localhost/\[DATABASE\], **UserModelName** environment variable as your user table name and **ItemModelName** environment variable as your items table name
-* If you are deploying on docker compose, change the **DatabaseURL** environment variable in the docker-compose.yml under python service in the format postgresql://\[USER\]:\[PASSWORD\]@pgsql/\[DATABASE\], **UserModelName** environment variable as your user table name and **ItemModelName** environment variable as your items table name. Also change the environment variables under pgsql service according to the **DatabaseURL** provided.
+* If you are deploying on docker compose, change the **DatabaseURL** environment variable in the docker-compose.yml under python service in the format postgresql://\[USER\]:\[PASSWORD\]@pgsql/\[DATABASE\] (where pgsql is the  name of the postgres service in docker-compose file), **UserModelName** environment variable as your user table name and **ItemModelName** environment variable as your items table name. Also change the environment variables under pgsql service according to the **DatabaseURL** provided.
 * If you are deploying on kubernetes, we would need to hash the environment variable contents into base64 format
     - For Windows: powershell \"\[convert\]::ToBase64String\(\[Text.Encoding\]::UTF8.GetBytes\(\"\[CONTENT\]\"\)\)\"
+
     - For Ubuntu: echo -n \"\[CONTENT\]\" | base64
     - Set the base64 encoded value of postgresql user, password and database in postgres-username, postgres-password, postgres-database fields of postgres-secret.yaml
-    - Set the base64 encoded value of Database connection string, users table name and items table name in DatabaseURL, UserModelName and ItemModelName fields of fastapi-secret.yaml
+    - Set the base64 encoded value of Database connection string (in the format postgresql://\[USER\]:\[PASSWORD\]@pgsql/\[DATABASE\] where pgsql is the  name of the postgres service in  postgres-service file), users table name and items table name in DatabaseURL, UserModelName and ItemModelName fields of fastapi-secret.yaml
 
 ### Executing program
 * Stay on the CRUD directory
+
 * For **Execution on the System** 
 ```
 uvicorn backendapi.sql_app.main:app --reload --host 0.0.0.0 --port 8000
@@ -56,3 +60,27 @@ kubectl apply -f fastapi-deployment.yaml
 kubectl apply -f fastapi-service.yaml
 ```
 Now the API could be accessed via SwaggerUI in the url <http://\$\(minikube ip\):30008/docs>
+
+## Note
+* We can ssh into minikube using 
+```
+$ ssh -i ~/.minikube/machines/minikube/id_rsa docker@$(minikube ip)
+```
+* We can access any running container identified using the command **docker ps** using
+```
+docker exec -it CONTAINER_NAME bash
+```
+* Database runs in the **namespace of the container**. So the Database URL must contain the container name instead of localhost.
+
+* Do not use port 5432 explicitly in yaml of postgres
+* Building docker image
+    - Create a docker repository in your account
+    
+    - Build a docker image from Docker file using
+        ```
+        $ docker build [DOCKER_FILE_PATH] -t [USERNAME/REPONAME:TAG]
+        ``` 
+    - Push the build image to docker hub using 
+        ```
+        $ docker push USERNAME/REPONAME:TAG
+        ```
